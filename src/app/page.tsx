@@ -60,7 +60,7 @@ export default function HomePage() {
         <section className="py-16 px-6 md:px-20 bg-white">
           <h2 className="text-3xl font-bold text-center mb-6">About Us</h2>
           <p className="text-center max-w-3xl mx-auto text-gray-700 leading-relaxed">
-            India Bazzar is a solution built during Tutedude's Web Dev Hackathon to empower India’s
+            India Bazzar is a solution built  to empower India’s
             street food economy. Our mission is to make procurement and sales smooth, real-time, and
             smart for every vendor and supplier on the streets of India.
           </p>

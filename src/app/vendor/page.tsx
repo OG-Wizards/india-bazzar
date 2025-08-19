@@ -19,6 +19,7 @@ import { Input } from "../components/ui/input";
 import { Search, Mic, ShoppingCart, X } from "lucide-react";
 import { useRouter } from "next/navigation";  // ✅ import router
 interface Product {
+  city: string;
   id: string;
   name: string;
   price: number;
@@ -37,6 +38,7 @@ const VendorDashboard = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filtered, setFiltered] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
+  
   const [showCart, setShowCart] = useState(false);
   const [reviews, setReviews] = useState<Record<string, Review[]>>({});
   const [reviewText, setReviewText] = useState<Record<string, string>>({});
@@ -45,6 +47,12 @@ const VendorDashboard = () => {
   const [listening, setListening] = useState(false);
   const [search, setSearch] = useState('');
   const reviewUnsubscribers = useRef<Record<string, () => void>>({});
+const [filters, setFilters] = useState({
+  city: "",
+  category: "",
+  minPrice: "",
+  maxPrice: "",
+});
 
   // ✅ Voice search setup
   useEffect(() => {
@@ -75,11 +83,20 @@ const VendorDashboard = () => {
       try {
         const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
-        const data: Product[] = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as any),
-          createdAt: (doc.data().createdAt as Timestamp)?.toDate() ?? new Date(),
-        }));
+       const data: Product[] = snapshot.docs.map((doc) => {
+  const docData = doc.data() as any;
+  return {
+    id: doc.id,
+    name: docData.name,
+    price: docData.price,
+    description: docData.description,
+    city: docData.supplierCity || "Not Provided", // ✅ use supplierCity
+    category: docData.category || "",
+    createdAt: (docData.createdAt as Timestamp)?.toDate() ?? new Date(),
+  };
+});
+
+
         setProducts(data);
         setFiltered(data);
 
@@ -193,7 +210,7 @@ const handleBuyNow = (product: any) => {
   }, [searchQuery, products]);
 
   return (
-    <div className="p-6 min-h-screen text-black" style={{ background: "#BBDCE5" }}>
+    <div className="p-6 min-h-screen text-black" style={{ background: "#FFFDF6" }}>
       <h1
         className="text-3xl font-bold mb-6 text-center"
         style={{ color: "#000405ff" }}
@@ -204,13 +221,13 @@ const handleBuyNow = (product: any) => {
       {/* Search */}
       <div
         className="flex items-center gap-2 mb-6 max-w-lg mx-auto text-white"
-        style={{ background: "#BBDCE5" }}
+        style={{ background: "#FFFDF6" }}
       >
         <Input
           placeholder="Search products..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1"
+          className="flex-1 bg-gray-100 text-black text-semibold"
         />
         <Button
           className="mt-3 text-black"
@@ -236,6 +253,94 @@ const handleBuyNow = (product: any) => {
         )}
       </button>
 
+      {/* 🔎 Filters */}
+<div className="bg-white shadow p-4 rounded-lg mb-6">
+  <h2 className="font-bold text-lg mb-4 text-black">Filter Options</h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {/* ✅ City Dropdown */}
+    <select
+      value={filters.city}
+      onChange={(e) =>
+        setFilters((prev) => ({ ...prev, city: e.target.value }))
+      }
+      className="border p-2 rounded bg-gray-100 text-black font-semibold"
+    >
+      <option value="">All Cities</option>
+      <option value="Delhi">Delhi</option>
+      <option value="sangli">sangli</option>
+      <option value="Bangalore">Bangalore</option>
+      <option value="Hyderabad">Hyderabad</option>
+      <option value="Chennai">Chennai</option>
+      <option value="Kolkata">Kolkata</option>
+      <option value="Pune">Pune</option>
+    </select>
+
+    {/* Category Filter */}
+    <Input
+      placeholder="Filter by Category..."
+      value={filters.category}
+      onChange={(e) =>
+        setFilters((prev) => ({ ...prev, category: e.target.value }))
+      }
+      className="border p-2 rounded bg-gray-100 text-black font-semibold"
+    />
+
+    {/* Price Range */}
+    <div className="flex gap-2">
+      <Input
+        type="number"
+        placeholder="Min Price"
+        value={filters.minPrice}
+        onChange={(e) =>
+          setFilters((prev) => ({ ...prev, minPrice: e.target.value }))
+        }
+        className="border p-2 rounded w-1/2 bg-gray-100 text-black font-semibold"
+      />
+      <Input
+        type="number"
+        placeholder="Max Price"
+        value={filters.maxPrice}
+        onChange={(e) =>
+          setFilters((prev) => ({ ...prev, maxPrice: e.target.value }))
+        }
+        className="border p-2 rounded w-1/2 bg-gray-100 text-black font-semibold"
+      />
+    </div>
+  </div>
+
+  {/* Apply Filters */}
+  <Button
+    className="mt-4 text-black"
+    style={{ background: "#D9C4B0" }}
+    onClick={() => {
+      let result = [...products];
+
+      if (filters.city) {
+        result = result.filter((p: any) =>
+          (p.city || "").toLowerCase() === filters.city.toLowerCase()
+        );
+      }
+      if (filters.category) {
+        result = result.filter((p: any) =>
+          (p.category || "").toLowerCase().includes(filters.category.toLowerCase())
+        );
+      }
+      if (filters.minPrice) {
+        result = result.filter((p) => p.price >= parseInt(filters.minPrice));
+      }
+      if (filters.maxPrice) {
+        result = result.filter((p) => p.price <= parseInt(filters.maxPrice));
+      }
+
+      setFiltered(result);
+    }}
+  >
+    Apply Filters
+  </Button>
+</div>
+
+
       {/* Products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((product) => (
@@ -248,16 +353,10 @@ const handleBuyNow = (product: any) => {
               <h2 className="text-black font-semibold">{product.name}</h2>
               <p className="text-black">{product.description}</p>
               <p className="font-bold mt-2 text-black">₹{product.price}</p>
-              {(product as any).location && (
-  <a
-    href={`https://www.google.com/maps?q=${(product as any).location.latitude},${(product as any).location.longitude}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-blue-600 underline mt-1 block"
-  >
-    📍 View Supplier Location
-  </a>
-)}
+              <p className="text-gray-700 mt-1">
+  📍 Supplier City: {product.city }
+</p>
+
 
               <Button
                 className="mt-3 text-black"
@@ -279,13 +378,13 @@ const handleBuyNow = (product: any) => {
               <div className="mt-4 text-black">
                 <h3 className="font-bold">Reviews:</h3>
                <div 
-  className="space-y-2 max-h-32 overflow-y-auto border p-2 rounded"
+  className="space-y-2 max-h-32 overflow-y-auto border p-2 rounded "
   style={{ backgroundColor: "#F9F3EE", borderColor: "#D9C4B0" }} // box color + border color
 >
   {(reviews[product.id] || []).map((review) => (
     <p 
       key={review.id} 
-      className="text-sm" 
+      className="text-sm " 
       style={{ color: "#4A2C2A" }} // text color
     >
       {review.text}
@@ -293,9 +392,10 @@ const handleBuyNow = (product: any) => {
   ))}
 </div>
 
-                <div className="flex gap-2 mt-2">
+                <div className="flex gap-2 mt-2 ">
               
                   <Input
+                  className="bg-gray-100 text-black text-semibold"
                     placeholder="Write a review..."
                     value={reviewText[product.id] || ""}
                     onChange={(e) =>
@@ -358,4 +458,5 @@ const handleBuyNow = (product: any) => {
   );
 };
 
-export default VendorDashboard;
+export default VendorDashboard;  
+

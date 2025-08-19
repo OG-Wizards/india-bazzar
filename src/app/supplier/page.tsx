@@ -1,5 +1,5 @@
 'use client';
-
+import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { auth, db } from '@/firebase/config';
 import {
@@ -7,22 +7,36 @@ import {
   addDoc,
   onSnapshot,
   deleteDoc,
-  doc,
+  
   query,
   where,
 } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 
 export default function SupplierDashboard() {
+  const [userData, setUserData] = useState<any>(null);
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [product, setProduct] = useState({
     name: '',
     price: '',
     description: '',
-    address: '',
     quantity: '',
-  });
+  });  
+
+  useEffect(() => {
+  const fetchUserData = async () => {
+    if (user) {
+      const docRef = doc(db, "users", user.uid); // assuming you saved signup data in `users`
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUserData(docSnap.data());
+      }
+    }
+  };
+  fetchUserData();
+}, [user]);
+
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,49 +46,52 @@ export default function SupplierDashboard() {
     const { name, value } = e.target;
     setProduct((prev) => ({ ...prev, [name]: value }));
   };
+  
 
   const handleAddProduct = async () => {
-  if (!user) return alert("User not authenticated");
+    if (!user) return alert("User not authenticated");
 
-  if (!product.name || !product.price || !product.quantity || !product.address) {
-    return alert("All fields are required.");
-  }
+    if (!product.name || !product.price || !product.quantity) {
+      return alert("All fields are required.");
+    }
 
-  // ✅ Get live location
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      const { latitude, longitude } = position.coords;
+    // ✅ Get live location (stored in Firestore but not displayed here)
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        
+      
 
-      try {
-        await addDoc(collection(db, "products"), {
-          ...product,
-          price: parseFloat(product.price),
-          quantity: parseInt(product.quantity),
-          supplierId: user.uid,
-          createdAt: new Date(),
-          location: { latitude, longitude }, // store live location
-        });
+        try {
+          await addDoc(collection(db, "products"), {
+            ...product,
+            price: parseFloat(product.price),
+            quantity: parseInt(product.quantity),
+            supplierId: user.uid,
+            supplierCity: userData.city,
+            createdAt: new Date(),
+            location: { latitude, longitude }, // store live location
+          });
 
-        setProduct({
-          name: "",
-          price: "",
-          description: "",
-          address: "",
-          quantity: "",
-        });
-        alert("Product added with location!");
-      } catch (err) {
-        console.error(err);
-        alert("Failed to add product.");
-      }
-    },
-    (error) => {
-      console.error(error);
-      alert("Could not get location. Please allow location access.");
-    },
-    { enableHighAccuracy: true }
-  );
-};
+          setProduct({
+            name: "",
+            price: "",
+            description: "",
+            quantity: "",
+          });
+          alert("Product added with location!");
+        } catch (err) {
+          console.error(err);
+          alert("Failed to add product.");
+        }
+      },
+      (error) => {
+        console.error(error);
+        alert("Could not get location. Please allow location access.");
+      },
+      { enableHighAccuracy: true }
+    );
+  };
 
   const handleDelete = async (id: string) => {
     try {
@@ -110,11 +127,14 @@ export default function SupplierDashboard() {
     });
 
     return () => unsubscribeAuth();
-  }, [router]); // <-- FIXED dependency array
+  }, [router]);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold  mb-4">Supplier Dashboard</h1>
+    <div className="min-h-screen w-full p-6"
+    style={{background:"#FFFDF6"}}>
+
+    
+      <h1 className="text-2xl text-black font-bold mb-4">Supplier Dashboard</h1>
 
       {/* Add Product Form */}
       <div className="grid gap-3 mb-6">
@@ -124,7 +144,7 @@ export default function SupplierDashboard() {
           placeholder="Product Name"
           value={product.name}
           onChange={handleChange}
-          className="border p-2 rounded"
+          className="border p-2 rounded border-black text-black"
         />
         <input
           type="number"
@@ -132,7 +152,7 @@ export default function SupplierDashboard() {
           placeholder="Price"
           value={product.price}
           onChange={handleChange}
-          className="border p-2 rounded"
+          className="border p-2 rounded border-black text-black"
         />
         <input
           type="number"
@@ -140,22 +160,14 @@ export default function SupplierDashboard() {
           placeholder="Quantity"
           value={product.quantity}
           onChange={handleChange}
-          className="border p-2 rounded"
+          className="border p-2 rounded border-black text-black"
         />
         <textarea
           name="description"
           placeholder="Description"
           value={product.description}
           onChange={handleChange}
-          className="border p-2 rounded"
-        />
-        <input
-          type="text"
-          name="address"
-          placeholder="Address"
-          value={product.address}
-          onChange={handleChange}
-          className="border p-2 rounded"
+          className="border p-2 rounded border-black text-black"
         />
         <button
           onClick={handleAddProduct}
@@ -166,7 +178,7 @@ export default function SupplierDashboard() {
       </div>
 
       {/* Product List */}
-      <h2 className="text-xl font-semibold mb-2">Your Products</h2>
+      <h2 className="text-xl text-black font-semibold mb-2">Your Products</h2>
       {loading ? (
         <p>Loading...</p>
       ) : products.length === 0 ? (
@@ -176,18 +188,17 @@ export default function SupplierDashboard() {
           {products.map((p) => (
             <li
               key={p.id}
-              className="border p-3 rounded flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center"
-            >
+              className="border p-3 rounded flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center border-black"
+            style={{background:"#DDEB9D"}}>
               <div>
-                <h3 className="font-bold text-lg">{p.name}</h3>
-                <p>₹{p.price} per unit</p>
-                <p>📦 Quantity: {p.quantity}</p>
+                <h3 className="font-bold text-lg text-black"
+                >{p.name}</h3>
+                <p className="text-sm text-gray-900">₹{p.price} per unit</p>
+                <p className="text-sm text-gray-900">📦 Quantity: {p.quantity}</p>
                 {p.description && (
-                  <p className="text-sm text-gray-600">{p.description}</p>
+                  <p className="text-sm text-gray-900">{p.description}</p>
                 )}
-                {p.address && (
-                  <p className="text-sm text-gray-500">📍 {p.address}</p>
-                )}
+                {/* 🚫 Address/Location removed */}
               </div>
               <button
                 onClick={() => handleDelete(p.id)}
@@ -200,5 +211,7 @@ export default function SupplierDashboard() {
         </ul>
       )}
     </div>
+    
   );
+  
 }
