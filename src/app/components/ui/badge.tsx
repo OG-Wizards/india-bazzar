@@ -1,17 +1,24 @@
-// src/components/ui/badge.tsx
+// src/app/components/ui/badge.tsx
+'use client';
+
 import React from 'react';
 
 interface BadgeProps {
   children: React.ReactNode;
   className?: string;
+  variant?: 'outline' | 'default'; // <- add this if needed
 }
 
-export const Badge: React.FC<BadgeProps> = ({ children, className = '' }) => {
+export function Badge({ children, className = '', variant = 'default' }: BadgeProps) {
+  const baseStyles = 'px-2 py-1 rounded-full text-sm font-medium';
+  const variants = {
+    default: 'bg-gray-200 text-gray-800',
+    outline: 'border border-blue-500 text-blue-600',
+  };
+
   return (
-    <span
-      className={`inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 ${className}`}
-    >
+    <span className={`${baseStyles} ${variants[variant]} ${className}`}>
       {children}
     </span>
   );
-};
+}

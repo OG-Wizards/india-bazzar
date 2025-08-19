@@ -1,0 +1,196 @@
+[debug] [2025-07-27T18:28:22.465Z] ----------------------------------------------------------------------
+[debug] [2025-07-27T18:28:22.468Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\deshm\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-07-27T18:28:22.468Z] CLI Version:   14.11.1
+[debug] [2025-07-27T18:28:22.468Z] Platform:      win32
+[debug] [2025-07-27T18:28:22.468Z] Node Version:  v22.17.1
+[debug] [2025-07-27T18:28:22.468Z] Time:          Sun Jul 27 2025 23:58:22 GMT+0530 (India Standard Time)
+[debug] [2025-07-27T18:28:22.468Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-27T18:28:22.620Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-27T18:28:22.621Z] > authorizing via signed-in user (deshmukhaddi9600@gmail.com)
+[debug] [2025-07-27T18:28:22.621Z] [iam] checking project india-bazzar-cdc49 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-27T18:28:22.622Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:28:22.622Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:28:22.623Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions [none]
+[debug] [2025-07-27T18:28:22.623Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions x-goog-quota-user=projects/india-bazzar-cdc49
+[debug] [2025-07-27T18:28:22.623Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-27T18:28:24.090Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions 200
+[debug] [2025-07-27T18:28:24.090Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-27T18:28:24.090Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:28:24.090Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:28:24.090Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-07-27T18:28:24.090Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-07-27T18:28:25.725Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions 404
+[debug] [2025-07-27T18:28:25.726Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions {"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}}
+[debug] [2025-07-27T18:28:25.727Z] [functions] service account IAM check errored, deploy may fail: Request to https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions had HTTP Error: 404, Unknown service account {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions had HTTP Error: 404, Unknown service account","status":404}
+[debug] [2025-07-27T18:28:25.729Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:28:25.729Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:28:25.729Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/india-bazzar-cdc49 [none]
+[debug] [2025-07-27T18:28:26.442Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/india-bazzar-cdc49 200
+[debug] [2025-07-27T18:28:26.442Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/india-bazzar-cdc49 {"projectId":"india-bazzar-cdc49","projectNumber":"284925153796","displayName":"india-bazzar","name":"projects/india-bazzar-cdc49","resources":{"hostingSite":"india-bazzar-cdc49"},"state":"ACTIVE","etag":"1_7202c5c9-a4ed-422e-a847-a18d29babad8"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-27T18:28:33.109Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:28:33.109Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:28:33.109Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/india-bazzar-cdc49/sites/india-bazzar-cdc49 [none]
+[debug] [2025-07-27T18:28:34.224Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/india-bazzar-cdc49/sites/india-bazzar-cdc49 200
+[debug] [2025-07-27T18:28:34.224Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/india-bazzar-cdc49/sites/india-bazzar-cdc49 {"name":"projects/india-bazzar-cdc49/sites/india-bazzar-cdc49","defaultUrl":"https://india-bazzar-cdc49.web.app","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 15.4.4
+
+[info] 
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully in 3.0s
+
+[info]    Linting and checking validity of types ...
+
+[info] Failed to compile.
+
+
+[info] ./src/app/vendor/page.tsx:122:19
+Type error: Type '{ children: string; variant: string; size: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.
+  Property 'variant' does not exist on type 'IntrinsicAttributes & ButtonProps'.
+
+  120 |                 </div>
+  121 |                 <Button
+> 122 |                   variant="destructive"
+      |                   ^
+  123 |                   size="sm"
+  124 |                   onClick={() => removeFromCart(item.id)}
+  125 |                 >
+
+[info] Next.js build worker exited with code: 1 and signal: null
+
+[debug] [2025-07-27T18:28:45.491Z] Error: ENOENT: no such file or directory, open 'C:\Users\deshm\india-bazzar\.next\export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-07-27T18:30:05.633Z] ----------------------------------------------------------------------
+[debug] [2025-07-27T18:30:05.635Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\deshm\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-07-27T18:30:05.636Z] CLI Version:   14.11.1
+[debug] [2025-07-27T18:30:05.636Z] Platform:      win32
+[debug] [2025-07-27T18:30:05.636Z] Node Version:  v22.17.1
+[debug] [2025-07-27T18:30:05.636Z] Time:          Mon Jul 28 2025 00:00:05 GMT+0530 (India Standard Time)
+[debug] [2025-07-27T18:30:05.636Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-27T18:30:05.792Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-27T18:30:05.792Z] > authorizing via signed-in user (deshmukhaddi9600@gmail.com)
+[debug] [2025-07-27T18:30:05.792Z] [iam] checking project india-bazzar-cdc49 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-27T18:30:05.793Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:30:05.793Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:30:05.794Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions [none]
+[debug] [2025-07-27T18:30:05.794Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions x-goog-quota-user=projects/india-bazzar-cdc49
+[debug] [2025-07-27T18:30:05.794Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-27T18:30:07.316Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions 200
+[debug] [2025-07-27T18:30:07.316Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/india-bazzar-cdc49:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-27T18:30:07.317Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:30:07.317Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:30:07.317Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-07-27T18:30:07.317Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-07-27T18:30:09.045Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions 404
+[debug] [2025-07-27T18:30:09.045Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions {"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}}
+[debug] [2025-07-27T18:30:09.046Z] [functions] service account IAM check errored, deploy may fail: Request to https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions had HTTP Error: 404, Unknown service account {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://iam.googleapis.com/v1/projects/india-bazzar-cdc49/serviceAccounts/india-bazzar-cdc49@appspot.gserviceaccount.com:testIamPermissions had HTTP Error: 404, Unknown service account","status":404}
+[debug] [2025-07-27T18:30:09.048Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:30:09.048Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:30:09.048Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/india-bazzar-cdc49 [none]
+[debug] [2025-07-27T18:30:09.762Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/india-bazzar-cdc49 200
+[debug] [2025-07-27T18:30:09.763Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/india-bazzar-cdc49 {"projectId":"india-bazzar-cdc49","projectNumber":"284925153796","displayName":"india-bazzar","name":"projects/india-bazzar-cdc49","resources":{"hostingSite":"india-bazzar-cdc49"},"state":"ACTIVE","etag":"1_7202c5c9-a4ed-422e-a847-a18d29babad8"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-27T18:30:16.395Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:30:16.395Z] Checked if tokens are valid: true, expires at: 1753642503034
+[debug] [2025-07-27T18:30:16.395Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/india-bazzar-cdc49/sites/india-bazzar-cdc49 [none]
+[debug] [2025-07-27T18:30:17.541Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/india-bazzar-cdc49/sites/india-bazzar-cdc49 200
+[debug] [2025-07-27T18:30:17.542Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/india-bazzar-cdc49/sites/india-bazzar-cdc49 {"name":"projects/india-bazzar-cdc49/sites/india-bazzar-cdc49","defaultUrl":"https://india-bazzar-cdc49.web.app","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 15.4.4
+
+[info] 
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully in 1000ms
+
+[info]    Linting and checking validity of types ...
+
+[info] Failed to compile.
+
+
+[info] ./src/app/vendor/page.tsx:122:19
+Type error: Type '{ children: string; variant: string; size: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.
+  Property 'variant' does not exist on type 'IntrinsicAttributes & ButtonProps'.
+
+  120 |                 </div>
+  121 |                 <Button
+> 122 |                   variant="destructive"
+      |                   ^
+  123 |                   size="sm"
+  124 |                   onClick={() => removeFromCart(item.id)}
+  125 |                 >
+
+[info] 
+Failed to compile.
+
+[info] 
+./src/app/components/ui/input.tsx
+6:11  Error: An interface declaring no members is equivalent to its supertype.  @typescript-eslint/no-empty-object-type
+
+./src/app/login/page.tsx
+32:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/page.tsx
+63:61  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./src/app/signup/page.tsx
+48:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/supplier/page.tsx
+18:36  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+26:44  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+107:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/app/supplier-signup/page.tsx
+26:64  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+29:31  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+60:22  Warning: 'response' is defined but never used.  @typescript-eslint/no-unused-vars
+60:32  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+70:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+94:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/test/page.tsx
+16:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/vendor/page.tsx
+33:27  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/vendor-signup/page.tsx
+24:64  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+25:31  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+52:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+78:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/utils/sendOtp.ts
+41:17  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+
+[debug] [2025-07-27T18:30:26.049Z] Error: ENOENT: no such file or directory, open 'C:\Users\deshm\india-bazzar\.next\export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.

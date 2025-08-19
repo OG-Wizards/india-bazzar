@@ -34,41 +34,47 @@ export default function SupplierDashboard() {
   };
 
   const handleAddProduct = async () => {
-    if (!user) {
-      alert('User not authenticated. Please login again.');
-      return;
-    }
+  if (!user) return alert("User not authenticated");
 
-    const { name, price, quantity, description, address } = product;
+  if (!product.name || !product.price || !product.quantity || !product.address) {
+    return alert("All fields are required.");
+  }
 
-    if (!name || !price || !quantity || !address) {
-      alert('All fields are required.');
-      return;
-    }
+  // ✅ Get live location
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const { latitude, longitude } = position.coords;
 
-    try {
-      await addDoc(collection(db, 'products'), {
-        name,
-        price: parseFloat(price),
-        quantity: parseInt(quantity),
-        description,
-        address,
-        supplierId: user.uid,
-        createdAt: new Date(),
-      });
+      try {
+        await addDoc(collection(db, "products"), {
+          ...product,
+          price: parseFloat(product.price),
+          quantity: parseInt(product.quantity),
+          supplierId: user.uid,
+          createdAt: new Date(),
+          location: { latitude, longitude }, // store live location
+        });
 
-      setProduct({
-        name: '',
-        price: '',
-        description: '',
-        address: '',
-        quantity: '',
-      });
-    } catch (error) {
-      console.error('Error adding product:', error);
-      alert('Failed to add product.');
-    }
-  };
+        setProduct({
+          name: "",
+          price: "",
+          description: "",
+          address: "",
+          quantity: "",
+        });
+        alert("Product added with location!");
+      } catch (err) {
+        console.error(err);
+        alert("Failed to add product.");
+      }
+    },
+    (error) => {
+      console.error(error);
+      alert("Could not get location. Please allow location access.");
+    },
+    { enableHighAccuracy: true }
+  );
+};
 
   const handleDelete = async (id: string) => {
     try {
