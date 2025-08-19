@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'India Bazzar',
@@ -9,11 +10,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en"><head>
-      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    </head>
-      
+    <html lang="en">
+      <head />
       <body className="bg-white text-gray-900">
+        {/* Razorpay script */}
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="afterInteractive"
+        />
+
         {/* Toaster for Sonner notifications */}
         <Toaster
           position="top-right"

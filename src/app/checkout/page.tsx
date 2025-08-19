@@ -32,11 +32,11 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6 border border-gray-600">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
-        <h1 className="text-2xl font-bold mb-4">Checkout</h1>
-        <p className="mb-2"><strong>Product:</strong> {name}</p>
-        <p className="mb-4"><strong>Price:</strong> ₹{price}</p>
+        <h1 className="text-2xl font-bold mb-4 text-black">Checkout</h1>
+        <p className="mb-2 text-black"><strong>Product:</strong> {name}</p>
+        <p className="mb-4 text-black"><strong>Price:</strong> ₹{price}</p>
 
         <button
           onClick={handlePayment}
