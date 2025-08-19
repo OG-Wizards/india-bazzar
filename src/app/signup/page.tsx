@@ -64,7 +64,7 @@ export default function SignupPage() {
           value={form.name}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border mb-3 rounded-md"
+          className="w-full px-4 py-2 border mb-3 rounded-md "
         />
 
         <input
@@ -74,7 +74,7 @@ export default function SignupPage() {
           value={form.city}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border mb-3 rounded-md"
+          className="w-full px-4 py-2 border mb-3 rounded-md "
         />
 
         <input
@@ -84,7 +84,7 @@ export default function SignupPage() {
           value={form.email}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border mb-3 rounded-md"
+          className="w-full px-4 py-2 border mb-3 rounded-md "
         />
 
         <input
@@ -94,7 +94,7 @@ export default function SignupPage() {
           value={form.password}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border mb-3 rounded-md"
+          className="w-full px-4 py-2 border mb-3 rounded-md "
         />
 
         <select

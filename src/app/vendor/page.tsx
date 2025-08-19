@@ -43,7 +43,7 @@ const VendorDashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const recognitionRef = useRef<any>(null);
   const [listening, setListening] = useState(false);
-
+  const [search, setSearch] = useState('');
   const reviewUnsubscribers = useRef<Record<string, () => void>>({});
 
   // ✅ Voice search setup
@@ -220,6 +220,7 @@ const handleBuyNow = (product: any) => {
         >
           <Mic className={listening ? "text-red-500" : ""} />
         </Button>
+        
       </div>
 
       {/* Floating Cart Button */}
@@ -347,6 +348,7 @@ const handleBuyNow = (product: any) => {
                     Remove
                   </button>
                 </div>
+                
               ))
             )}
           </div>

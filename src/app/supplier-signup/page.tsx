@@ -99,8 +99,8 @@ export default function SupplierSignup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Supplier Signup</h2>
-        {error && <p className="text-red-500 mb-3">{error}</p>}
+        <h2 className="text-2xl font-bold text-black mb-4">Supplier Signup</h2>
+        {error && <p className="text-red-500 mb-3 ">{error}</p>}
 
         {!otpSent ? (
           <>
@@ -110,7 +110,7 @@ export default function SupplierSignup() {
               placeholder="Name"
               value={form.name}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -119,7 +119,7 @@ export default function SupplierSignup() {
               placeholder="City"
               value={form.city}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -128,7 +128,7 @@ export default function SupplierSignup() {
               placeholder="Email"
               value={form.email}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -137,7 +137,7 @@ export default function SupplierSignup() {
               placeholder="Password"
               value={form.password}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -146,7 +146,7 @@ export default function SupplierSignup() {
               placeholder="Phone Number"
               value={form.phone}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -155,7 +155,7 @@ export default function SupplierSignup() {
               placeholder="GSTIN"
               value={form.gstin}
               onChange={handleChange}
-              className="w-full border p-2 mb-4"
+              className="w-full border p-2 mb-4 text-gray-800"
               required
             />
             <button
@@ -174,13 +174,13 @@ export default function SupplierSignup() {
               placeholder="Enter OTP"
               value={form.otp}
               onChange={handleChange}
-              className="w-full border p-2 mb-3"
+              className="w-full border p-2 mb-3 text-gray-800"
               required
             />
             <button
               type="button"
               onClick={verifyOTPAndSignup}
-              className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+              className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 "
             >
               Verify OTP & Signup
             </button>

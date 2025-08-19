@@ -114,7 +114,7 @@ export default function SupplierDashboard() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Supplier Dashboard</h1>
+      <h1 className="text-2xl font-bold  mb-4">Supplier Dashboard</h1>
 
       {/* Add Product Form */}
       <div className="grid gap-3 mb-6">

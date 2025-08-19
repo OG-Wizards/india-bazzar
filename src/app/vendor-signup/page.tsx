@@ -83,7 +83,7 @@ export default function VendorSignup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Vendor Signup</h2>
+        <h2 className="text-2xl font-bold text-black mb-4">Vendor Signup</h2>
         {error && <p className="text-red-500 mb-3">{error}</p>}
 
         {!otpSent ? (
@@ -94,7 +94,7 @@ export default function VendorSignup() {
               placeholder="Name"
               value={form.name}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -103,7 +103,7 @@ export default function VendorSignup() {
               placeholder="City"
               value={form.city}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -112,7 +112,7 @@ export default function VendorSignup() {
               placeholder="Email"
               value={form.email}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -121,7 +121,7 @@ export default function VendorSignup() {
               placeholder="Password"
               value={form.password}
               onChange={handleChange}
-              className="w-full border p-2 mb-2"
+              className="w-full border p-2 mb-2 text-gray-800"
               required
             />
             <input
@@ -130,7 +130,7 @@ export default function VendorSignup() {
               placeholder="Mobile Number"
               value={form.mobile}
               onChange={handleChange}
-              className="w-full border p-2 mb-4"
+              className="w-full border p-2 mb-4 text-gray-800"
               required
             />
             <button
@@ -149,7 +149,7 @@ export default function VendorSignup() {
               placeholder="Enter OTP"
               value={form.otp}
               onChange={handleChange}
-              className="w-full border p-2 mb-3"
+              className="w-full border p-2 mb-3 text-gray-800"
               required
             />
             <button

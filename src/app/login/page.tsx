@@ -40,7 +40,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-black text-center">Login</h2>
 
         <div className="space-y-4">
           <input
@@ -48,14 +48,14 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="w-full border rounded px-4 py-2"
+            className="w-full border rounded px-4 py-2 text-gray-800"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="w-full border rounded px-4 py-2"
+            className="w-full border rounded px-4 py-2 text-gray-800"
           />
 
           <button
