@@ -22,7 +22,7 @@ export default function TestSignup() {
     <div className="p-4">
       <h1>Test Signup</h1>
       <input
-        className="border p-2"
+     
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"

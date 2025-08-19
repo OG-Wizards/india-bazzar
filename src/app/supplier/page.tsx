@@ -110,7 +110,7 @@ export default function SupplierDashboard() {
     });
 
     return () => unsubscribeAuth();
-  }, []);
+  }, [router]); // <-- FIXED dependency array
 
   return (
     <div className="p-6 max-w-4xl mx-auto">

@@ -57,7 +57,7 @@ export default function SupplierSignup() {
       if (!recaptchaRef.current) {
         recaptchaRef.current = new RecaptchaVerifier(auth, 'recaptcha-container', {
           size: 'invisible',
-          callback: (response: any) => {
+          callback: () => {
             // reCAPTCHA solved
           },
         });
