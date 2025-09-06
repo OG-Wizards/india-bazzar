@@ -13,9 +13,12 @@ import {
 } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 
+import { ArrowLeft } from "lucide-react";
 export default function SupplierDashboard() {
   const [userData, setUserData] = useState<any>(null);
   const router = useRouter();
+const navrouter = useRouter();
+
   const [user, setUser] = useState<any>(null);
   const [product, setProduct] = useState({
     name: '',
@@ -130,12 +133,29 @@ export default function SupplierDashboard() {
   }, [router]);
 
   return (
-    <div className="min-h-screen w-full p-6"
-    style={{background:"#FFFDF6"}}>
+    <div className="min-h-screen bg-gray-100 p-6">
+      {/* Back Button */}
+     <div className="flex justify-between items-center absolute top-4 left-4 right-4">
+  {/* Back Button - Top Left */}
+  <button
+    onClick={() => router.back()}
+    className="flex items-center gap-2 bg-white text-gray-700 px-4 py-2 rounded-xl shadow hover:bg-gray-200 transition"
+  >
+    <ArrowLeft size={18} />
+    Back
+  </button>
 
-    
-      <h1 className="text-2xl text-black font-bold mb-4">Supplier Dashboard</h1>
-
+  {/* Profile Button - Top Right */}
+  <button
+     onClick={() => router.push('/supplier/profile')}
+    className="bg-blue-600 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-700 transition"
+  >
+    Profile
+  </button>
+</div>
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+        Supplier Dashboard
+      </h1>
       {/* Add Product Form */}
       <div className="grid gap-3 mb-6">
         <input
@@ -157,7 +177,7 @@ export default function SupplierDashboard() {
         <input
           type="number"
           name="quantity"
-          placeholder="Quantity"
+          placeholder="Quantity in kg"
           value={product.quantity}
           onChange={handleChange}
           className="border p-2 rounded border-black text-black"
@@ -177,39 +197,8 @@ export default function SupplierDashboard() {
         </button>
       </div>
 
-      {/* Product List */}
-      <h2 className="text-xl text-black font-semibold mb-2">Your Products</h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : products.length === 0 ? (
-        <p>No products listed yet.</p>
-      ) : (
-        <ul className="space-y-3">
-          {products.map((p) => (
-            <li
-              key={p.id}
-              className="border p-3 rounded flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center border-black"
-            style={{background:"#DDEB9D"}}>
-              <div>
-                <h3 className="font-bold text-lg text-black"
-                >{p.name}</h3>
-                <p className="text-sm text-gray-900">₹{p.price} per unit</p>
-                <p className="text-sm text-gray-900">📦 Quantity: {p.quantity}</p>
-                {p.description && (
-                  <p className="text-sm text-gray-900">{p.description}</p>
-                )}
-                {/* 🚫 Address/Location removed */}
-              </div>
-              <button
-                onClick={() => handleDelete(p.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+     
+    
     </div>
     
   );

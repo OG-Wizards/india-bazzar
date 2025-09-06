@@ -1,5 +1,5 @@
 "use client";
-
+import { ArrowLeft } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
 import {
   collection,
@@ -17,7 +17,9 @@ import  Button  from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Search, Mic, ShoppingCart, X } from "lucide-react";
-import { useRouter } from "next/navigation";  // ✅ import router
+import { useRouter } from "next/navigation"; 
+
+ // ✅ import router
 interface Product {
   city: string;
   id: string;
@@ -39,6 +41,7 @@ const VendorDashboard = () => {
   const [filtered, setFiltered] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
   
+const navrouter = useRouter();
   const [showCart, setShowCart] = useState(false);
   const [reviews, setReviews] = useState<Record<string, Review[]>>({});
   const [reviewText, setReviewText] = useState<Record<string, string>>({});
@@ -210,14 +213,21 @@ const handleBuyNow = (product: any) => {
   }, [searchQuery, products]);
 
   return (
-    <div className="p-6 min-h-screen text-black" style={{ background: "#FFFDF6" }}>
-      <h1
-        className="text-3xl font-bold mb-6 text-center"
-        style={{ color: "#000405ff" }}
+    <div className="min-h-screen bg-gray-100 p-6 relative">
+      {/* Back Button */}
+      <button
+         onClick={() => router.back()} 
+
+        className="flex items-center gap-2 bg-white text-gray-700 px-4 py-2 rounded-xl shadow hover:bg-gray-200 transition absolute top-4 left-4"
       >
+        <ArrowLeft size={18} />
+        Back
+      </button>
+
+      {/* Dashboard Heading */}
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
         Vendor Dashboard
       </h1>
-
       {/* Search */}
       <div
         className="flex items-center gap-2 mb-6 max-w-lg mx-auto text-white"
@@ -354,7 +364,7 @@ const handleBuyNow = (product: any) => {
               <p className="text-black">{product.description}</p>
               <p className="font-bold mt-2 text-black">₹{product.price}</p>
               <p className="text-gray-700 mt-1">
-  📍 Supplier City: {product.city }
+ Supplier City: {product.city }
 </p>
 
 
@@ -457,6 +467,5 @@ const handleBuyNow = (product: any) => {
     </div>
   );
 };
-
-export default VendorDashboard;  
-
+  
+export default VendorDashboard;

@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 import Script from 'next/script';
+import BackButton from '../app/components/BackButton'; // ✅ Import stays here
 
 export const metadata: Metadata = {
   title: 'India Bazzar',
@@ -29,6 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
           }}
         />
+
+        {/* ✅ Global Back Button */}
+        <BackButton />
+
+        {/* Existing Page Content */}
         {children}
       </body>
     </html>

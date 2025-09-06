@@ -153,7 +153,8 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100"
+    style={{backgroundImage:"C:\Users\deshm\Downloads\WhatsApp Image 2025-08-20 at 11.06.28_39486a87.jpg"}}>
       <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-black mb-4">Supplier Signup</h2>
         {error && <p className="text-red-500 mb-3">{error}</p>}
